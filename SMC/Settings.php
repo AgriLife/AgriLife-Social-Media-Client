@@ -11,9 +11,20 @@ class SMC_Settings {
 
 	public function __construct() {
 
+		$this->set_default();
+
 		add_action( 'admin_init', array( $this, 'initialize_options' ) );
 		add_action( 'admin_init', array( $this, 'make_options' ) );
 		add_action( 'admin_init', array( $this, 'register_options' ) );
+
+	}
+
+	private function set_default() {
+
+		$option = get_option( 'debug_mode', 'none' );
+
+		if ( $option == 'none' )
+			update_option( 'debug_mode', 0  );
 
 	}
 
