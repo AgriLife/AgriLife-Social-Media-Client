@@ -53,6 +53,7 @@ class AgriLife_SM_Client {
 	public function init() {
 
 		$smc_retrieve = new SMC_Retrieve;
+		$smc_retrieve = new SMC_Payload;
 
 	}
 
