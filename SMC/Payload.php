@@ -108,16 +108,52 @@ class SMC_Payload {
 
 		$payload = $this->payload;
 
-		$parsed = array();
+		$accounts = array();
 
 		foreach ( $payload as $p ) {
+
+			$parsed = array();
+			$fields = array();
 
 			$fields = $p['custom_fields'];
 			foreach ( $fields as $f ) {
 				$parsed[$f['key']] = $f['value'];
 			}
 
-			$accounts[$p['post_title']] = $parsed;
+			$account = array();
+
+			$account['account-name'] = $p['post_title'];
+			$account['account-type'] = $parsed['_smd_account-category'];
+
+			if ( isset( $parsed['_smd_twitter-url'] ) )
+				$account['twitter'] = $parsed['_smd_twitter-url'];
+
+			if ( isset( $parsed['_smd_google-plus-url'] ) )
+				$account['google-plus'] = $parsed['_smd_google-plus-url'];
+
+			if ( isset( $parsed['_smd_facebook-url'] ) )
+				$account['facebook'] = $parsed['_smd_facebook-url'];
+
+			if ( isset( $parsed['_smd_flickr-url'] ) )
+				$account['flickr'] = $parsed['_smd_flickr-url'];
+
+			if ( isset( $parsed['_smd_youtube-url'] ) )
+				$account['youtube'] = $parsed['_smd_youtube-url'];
+
+			if ( isset( $parsed['_smd_instagram-url'] ) )
+				$account['instagram'] = $parsed['_smd_instagram-url'];
+
+			if ( isset( $parsed['_smd_pinterest-url'] ) )
+				$account['pinterest'] = $parsed['_smd_pinterest-url'];
+
+			if ( isset( $parsed['_smd_blog-url'] ) )
+				$account['blog'] = $parsed['_smd_blog-url'];
+
+			if ( isset( $parsed['_smd_other-url'] ) )
+				$account['other'] = $parsed['_smd_other-url'];
+
+			array_push( $accounts, $account );
+
 		}
 
 		$this->accounts = $accounts;
