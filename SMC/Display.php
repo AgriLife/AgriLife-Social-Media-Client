@@ -43,7 +43,7 @@ class SMC_Display {
 		
 		foreach ( $account as $k => $v ) {
 			$output .= '<li class="social-media-item">';
-			$output .= '<a class="' . $k . 'href="' . $v . '">' . $k . '</a>';
+			$output .= '<a class="' . $k . '" href="' . $v . '">' . $k . '</a>';
 			$output .= '</li>';
 		}
 
