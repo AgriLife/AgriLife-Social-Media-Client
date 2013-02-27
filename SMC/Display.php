@@ -23,7 +23,7 @@ class SMC_Display {
 		foreach ( $accounts as $a ) {
 			if ( array_search( $org, $a ) ) {
 				echo '<li>';
-				echo '<span class="dept-name">' . $a['account-name'] . '</span>';
+				echo '<h3 class="dept-name">' . $a['account-name'] . '</h3>';
 				echo '<ul>';
 				echo $this->parse_accounts( $a );
 				echo '</ul>';
@@ -42,7 +42,9 @@ class SMC_Display {
 		$output = '';
 		
 		foreach ( $account as $k => $v ) {
-			$output .= '<li class="' . $k . '"><a href="' . $v . '">' . $k . '</a></li>';
+			$output .= '<li class="social-media-item">';
+			$output .= '<a class="' . $k . 'href="' . $v . '">' . $k . '</a>';
+			$output .= '</li>';
 		}
 
 		return $output;
