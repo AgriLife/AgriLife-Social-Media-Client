@@ -54,6 +54,7 @@ class AgriLife_SM_Client {
 
 		$smc_settings = new SMC_Settings;
 		$smc_retrieve = new SMC_Payload;
+		$smc_shortcode = new SMC_Shortcode;
 
 	}
 
