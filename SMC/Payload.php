@@ -85,7 +85,7 @@ class SMC_Payload {
 			$user,
 			$pass,
 			array(
-				'post_status' => 'draft',
+				'post_status' => 'publish',
 				'post_type' => 'account',
 			),
 		) );
