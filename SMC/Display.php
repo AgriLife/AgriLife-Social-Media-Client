@@ -2,18 +2,39 @@
 
 class SMC_Display {
 
+	/**
+	 * The object instance
+	 * 
+	 * @var object
+	 */
 	private static $instance;
 
+	/**
+	 * The accounts returned via XML-RPC
+	 * 
+	 * @var array
+	 */
 	private $accounts = array();
 
+	/**
+	 * Start the engine!
+	 */
 	public function __construct() {
 
 		self::$instance = $this;
 
+		// Get the accounts from the transient cache
 		$this->accounts = get_transient( 'smd_accounts' );
 
 	}
 
+	/**
+	 * Renders the account listing
+	 *
+	 * @since 1.0
+	 * @param  string $org The department/organization type
+	 * @return void
+	 */
 	public function show_accounts( $org ) {
 
 		$accounts = $this->accounts;
@@ -21,6 +42,7 @@ class SMC_Display {
 		echo '<div class="social-accounts">';
 		echo '<ul>';
 		foreach ( $accounts as $a ) {
+			// Show only accounts matching the org type
 			if ( array_search( $org, $a ) ) {
 				echo '<li>';
 				echo '<h3 class="dept-name">' . $a['account-name'] . '</h3>';
@@ -35,8 +57,15 @@ class SMC_Display {
 
 	}
 
+	/**
+	 * Parse each account into a list item
+	 * @param  array $account The account information
+	 * @return string         The account list item
+	 */
 	private function parse_accounts( $account ) {
 
+		// Remove account name and type from the array
+		// Leaves only the social media accounts
 		$account = array_slice( $account, 2 );
 
 		$output = '';
@@ -48,6 +77,18 @@ class SMC_Display {
 		}
 
 		return $output;
+
+	}
+
+	/**
+	 * Easily retrive the object instance
+	 *
+	 * @since 1.0
+	 * @return object
+	 */
+	public static function get_instance() {
+
+		return self::$instance;
 
 	}
 

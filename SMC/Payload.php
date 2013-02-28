@@ -175,9 +175,10 @@ class SMC_Payload {
 
 	/**
 	 * Throws an error if there's a problem retrieving the payload
-	 * 
+	 *
+	 * @since 1.0
 	 * @param  object $client The XML-RPC object
-	 * @return 
+	 * @return void
 	 */
 	private function error( $client ) {
 
@@ -191,6 +192,9 @@ class SMC_Payload {
 
 	/**
 	 * Sets $use_cache based on the option selected.
+	 *
+	 * @since 1.0
+	 * @return void
 	 */
 	private function set_use_cache() {
 
@@ -203,7 +207,8 @@ class SMC_Payload {
 
 	/**
 	 * Determines if the transient should be updated
-	 * 
+	 *
+	 * @since 1.0
 	 * @return boolean
 	 */
 	public static function expired() {
@@ -220,7 +225,8 @@ class SMC_Payload {
 
 	/**
 	 * Easily retrive the object instance
-	 * 
+	 *
+	 * @since 1.0
 	 * @return object
 	 */
 	public static function get_instance() {

@@ -31,25 +31,55 @@ Author URI: http://channeleaton.com
  */
 
 
-define( 'PLUGIN_NAME', 'AgriLife Social Media Client' );
-define( 'PLUGIN_DIR', 'agrilife-social-media-client' );
+// Plugin Definitions
+define( 'SMC_PLUGIN_NAME', 'AgriLife Social Media Client' );
+define( 'SMC_PLUGIN_DIR', 'agrilife-social-media-client' );
+define( 'SMC_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
+define( 'SMC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
+// Register the autoloading function
 spl_autoload_register( 'AgriLife_SM_Client::autoload' );
 
+/**
+ * The main plugin class
+ */
 class AgriLife_SM_Client {
 
+	/**
+	 * The class instance
+	 *
+	 * @since 1.0
+	 * @var object
+	 */
 	private static $instance;
 
+	/**
+	 * The plugin version number
+	 *
+	 * @since 1.0
+	 * @var string
+	 */
 	public static $version = '1.0';
 
+	/**
+	 * Class constructor
+	 */
 	public function __construct() {
 
+		// Save this instance of the class
 		self::$instance = $this;
 
+		// Fire off the init function
 		add_action( 'init', array( $this, 'init' ) );
 
 	}
 
+	/**
+	 * Instantiates the required classes
+	 *
+	 * @since 1.0
+	 * @return void
+	 */
 	public function init() {
 
 		$smc_settings = new SMC_Settings;
@@ -76,6 +106,12 @@ class AgriLife_SM_Client {
 
 	}
 
+	/**
+	 * Returns the class instance
+	 *
+	 * @since 1.0
+	 * @return object The class instance
+	 */
 	public static function get_instance() {
 
 		return self::$instance;
@@ -84,4 +120,5 @@ class AgriLife_SM_Client {
 
 }
 
+// Instantiate the plugin
 new AgriLife_SM_Client;

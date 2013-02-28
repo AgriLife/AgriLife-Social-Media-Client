@@ -7,18 +7,34 @@
  */
 class SMC_Settings {
 
+	/**
+	 * The class instance
+	 *
+	 * @since 1.0
+	 * @var object
+	 */
 	private static $instance;
 
+	/**
+	 * Class constructor
+	 */
 	public function __construct() {
 
+	 	// Sets the default options
 		$this->set_default();
 
+		// Hook into admin_init and create the settings
 		add_action( 'admin_init', array( $this, 'initialize_options' ) );
 		add_action( 'admin_init', array( $this, 'make_options' ) );
 		add_action( 'admin_init', array( $this, 'register_options' ) );
 
 	}
 
+	/**
+	 * Sets debug mode to off
+	 *
+	 * @since 1.0
+	 */
 	private function set_default() {
 
 		$option = get_option( 'debug_mode', 'none' );
@@ -28,6 +44,12 @@ class SMC_Settings {
 
 	}
 
+	/**
+	 * Adds the setting section on the 'General' page
+	 *
+	 * @since 1.0
+	 * @return void
+	 */
 	public function initialize_options() {
 
 		add_settings_section( 
@@ -39,10 +61,19 @@ class SMC_Settings {
 
 	}
 
+	/**
+	 * Not used.
+	 */
 	public function options_callback() {
 
 	}
 
+	/**
+	 * Registers the 'Debug Mode' settings field
+	 *
+	 * @since 1.0
+	 * @return void
+	 */
 	public function make_options() {
 
 		add_settings_field( 
@@ -58,6 +89,13 @@ class SMC_Settings {
 
 	}
 
+	/**
+	 * Renders the 'Debug Mode' settings field
+	 *
+	 * @since 1.0
+	 * @param  array $args Arguments passed from make_options()
+	 * @return void
+	 */
 	public function debug_mode_field( $args ) {
 
 		// Get the option. Set debug mode to off if option doesn't exist
@@ -74,6 +112,12 @@ class SMC_Settings {
 
 	}
 
+	/**
+	 * Registers the settings with WordPress
+	 *
+	 * @since 1.0
+	 * @return void
+	 */
 	public function register_options() {
 
 		register_setting( 
@@ -83,4 +127,16 @@ class SMC_Settings {
 
 	}
 
+	/**
+	 * Easily retrive the object instance
+	 *
+	 * @since 1.0
+	 * @return object
+	 */
+	public static function get_instance() {
+
+		return self::$instance;
+
+	}
+	
 }
